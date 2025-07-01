@@ -47,5 +47,6 @@ about:
 
 extra:
   recipe-maintainers:
+    - eunos-1128
     - padix-key
     - mhekkel
