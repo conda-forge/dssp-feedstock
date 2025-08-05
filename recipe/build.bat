@@ -26,6 +26,9 @@ if errorlevel 1 exit 1
 cmake --install build
 if errorlevel 1 exit 1
 
+if not exist "%PREFIX%\share\libcifpp" mkdir "%PREFIX%\share\libcifpp"
+if errorlevel 1 exit 1
+
 copy /Y "%SRC_DIR%\build\_deps\cifpp-src\rsrc\*.*" "%PREFIX%\share\libcifpp\"
 if errorlevel 1 exit 1
 
