@@ -1,7 +1,7 @@
 context:
   name: DSSP
-  version: "4.5.4"
-  sha256: f9e21009c54e07af292cbe43475b0f33dc7eff7472010939f4c4bb5dc4d809f8
+  version: "4.5.5"
+  sha256: 68bda916ade0bcb439929069b306788b389c4edfbe8b933dd32218d4124b5104
   build_number: 0
 
 package:
