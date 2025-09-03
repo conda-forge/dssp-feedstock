@@ -26,6 +26,7 @@ requirements:
     - cmake
     - if: unix
       then: make
+    - pkg-config
   host:
     - libboost-devel
     - libboost-python-devel
