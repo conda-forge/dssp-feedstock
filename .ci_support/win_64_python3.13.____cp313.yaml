@@ -14,6 +14,8 @@ libboost_devel:
 - '1.86'
 libboost_python_devel:
 - '1.86'
+pcre2:
+- '10.45'
 pin_run_as_build:
   python:
     min_pin: x.x
