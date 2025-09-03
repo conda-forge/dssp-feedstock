@@ -15,7 +15,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '14'
 docker_image:
-- quay.io/condaforge/linux-anvil-aarch64:alma9
+- quay.io/condaforge/linux-anvil-x86_64:alma9
 icu:
 - 75
 libboost_devel:
@@ -23,7 +23,7 @@ libboost_devel:
 libboost_python_devel:
 - '1.86'
 pcre2:
-- '10.45'
+- '10.46'
 pin_run_as_build:
   python:
     min_pin: x.x
