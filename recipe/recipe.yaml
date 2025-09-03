@@ -55,10 +55,6 @@ tests:
         then: run_test.sh
       - if: win
         then: run_test.bat
-    requirements:
-      run:
-        - if: unix
-          then: grep
     files:
       source:
         - test/1cbs.cif.gz
