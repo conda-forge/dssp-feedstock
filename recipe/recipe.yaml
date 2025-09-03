@@ -36,6 +36,7 @@ requirements:
     # libcifpp is fetched and statically linked during building.
     # - bioconda::libcifpp
     - libmcfp
+    - pcre2
     - python ${{ python }}
     - zlib
   run:
