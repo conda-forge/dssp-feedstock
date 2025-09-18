@@ -19,9 +19,9 @@ cxx_compiler_version:
 icu:
 - 75
 libboost_devel:
-- '1.86'
+- '1.87'
 libboost_python_devel:
-- '1.86'
+- '1.87'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 pcre2:
