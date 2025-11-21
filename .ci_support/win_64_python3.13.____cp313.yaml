@@ -15,17 +15,14 @@ libboost_devel:
 libboost_python_devel:
 - '1.89'
 pcre2:
-- '10.46'
+- '10.47'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.10.* *_cpython
+- 3.13.* *_cp313
 target_platform:
 - win-64
-zip_keys:
-- - python
-  - channel_sources
 zlib:
 - '1'
