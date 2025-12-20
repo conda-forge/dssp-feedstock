@@ -9,13 +9,12 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://github.com/cmbi/${{ name|lower }}/archive/refs/tags/v${{ version }}.tar.gz
+  url: https://github.com/cmbi/${{ name|lower }}/archive/refs/tags/${{ version }}.tar.gz
   sha256: ${{ sha256 }}
 
 build:
   number: ${{ build_number }}
-  skip:
-    - win
+  skip: win
   script: |
     set -exo pipefail
     
