@@ -22,10 +22,6 @@ build:
     export CXXFLAGS="${CXXFLAGS} -std=c++14 -O3"
     
     ./autogen.sh
-    
-    # Fix: Replace `std::basic_string<uint8>` with `std::string`
-    # Safe:  All amino acid codes are in range 0-23 (fits in signed char)
-    sed -i.bak 's|typedef std::basic_string<uint8> sequence;|typedef std::string sequence;|g' src/mas.h
         
     ./configure --prefix="${PREFIX}" \
                 --disable-static \
@@ -35,6 +31,10 @@ build:
                 CXX="${CXX}" \
                 CXXFLAGS="${CXXFLAGS}" \
                 LDFLAGS="${LDFLAGS}"
+    
+    # Fix: Replace `std::basic_string<uint8>` with `std::string`
+    # Safe:  All amino acid codes are in range 0-23 (fits in signed char)
+    sed -i.bak 's|typedef std::basic_string<uint8> sequence;|typedef std::string sequence;|g' src/mas.h
     
     make -j${CPU_COUNT}
     
