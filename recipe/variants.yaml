@@ -1,0 +1,7 @@
+c_compiler_version: 
+  - if: osx
+    then: 20
+
+cxx_compiler_version: 
+  - if: osx
+    then: 20
