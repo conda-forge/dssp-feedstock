@@ -11,6 +11,7 @@ package:
 source:
   url: https://github.com/cmbi/${{ name|lower }}/archive/refs/tags/${{ version }}.tar.gz
   sha256: ${{ sha256 }}
+  patches: dssp-boost-tr1.patch
 
 build:
   number: ${{ build_number }}
