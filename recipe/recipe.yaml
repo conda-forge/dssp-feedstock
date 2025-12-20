@@ -18,11 +18,15 @@ build:
   script: |
     set -exo pipefail
     
-    ./autogen.sh
-    
     # Avoid build errors with newer Clang versions
     export CXXFLAGS="${CXXFLAGS} -std=c++14 -O3"
     
+    ./autogen.sh
+    
+    # Fix: Replace `std::basic_string<uint8>` with `std::string`
+    # Safe:  All amino acid codes are in range 0-23 (fits in signed char)
+    sed -i.bak 's|typedef std::basic_string<uint8> sequence;|typedef std::string sequence;|g' src/mas.h
+        
     ./configure --prefix="${PREFIX}" \
                 --disable-static \
                 --enable-shared \
