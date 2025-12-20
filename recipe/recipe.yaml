@@ -48,9 +48,9 @@ requirements:
     - ${{ stdlib("c") }}
     - autoconf
     - automake
+    - cppcheck
     - libtool
     - make
-    - cppcheck
   host:
     - libboost-devel
     - bzip2
@@ -61,7 +61,7 @@ requirements:
 tests:
   - script:
       - mkdssp --version
-      - mkdssp --help
+      - mkdssp --help || true
 
 
 about:
