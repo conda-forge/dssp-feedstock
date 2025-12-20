@@ -21,7 +21,7 @@ build:
     ./autogen.sh
     
     # Avoid build errors with newer Clang versions
-    export CXXFLAGS="${CXXFLAGS} -Wno-enum-constexpr-conversion"
+    export CXXFLAGS="${CXXFLAGS} -std=c++14 -O3 -Wno-enum-constexpr-conversion"
     
     ./configure --prefix="${PREFIX}" \
                 --disable-static \
