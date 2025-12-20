@@ -20,6 +20,14 @@ build:
     
     # Avoid build errors with newer Clang versions
     export CXXFLAGS="${CXXFLAGS} -std=c++14 -O3"
+
+    # Fix: Replace `std::basic_string<uint8>` with `std::string`
+    # Safe:  All amino acid codes are in range 0-23 (fits in signed char)
+    sed -i.bak 's|typedef std::basic_string<uint8> sequence;|typedef std::string sequence;|' src/mas.h
+    sed -i.bak 's|typedef std::basic_string<uint8> sec_structure;|typedef std::string sec_structure;|' src/align-2d.h
+    
+    # Fix array subscript warning by casting char to unsigned char
+    sed -i.bak 's|kResidues\[s\[i\]\]|kResidues[(uint8)s[i]]|g' src/mas.cpp
     
     ./autogen.sh
         
@@ -31,10 +39,6 @@ build:
                 CXX="${CXX}" \
                 CXXFLAGS="${CXXFLAGS}" \
                 LDFLAGS="${LDFLAGS}"
-    
-    # Fix: Replace `std::basic_string<uint8>` with `std::string`
-    # Safe:  All amino acid codes are in range 0-23 (fits in signed char)
-    sed -i.bak 's|typedef std::basic_string<uint8> sequence;|typedef std::string sequence;|g' src/mas.h
     
     make -j${CPU_COUNT}
     
