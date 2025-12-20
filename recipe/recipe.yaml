@@ -1,83 +1,84 @@
 context:
   name: DSSP
-  version: "4.5.7"
-  sha256: 4b2c399e34338e67b4ee4c44569fa7464da1f4a5b5cc4b7fd41148e294ddb4f5
-  build_number: 1
+  version: "3.1.4"
+  sha256: 496282b4b5defc55d111190ab9f1b615a9574a2f090e7cf5444521c747b272d4
+  build_number: 0
 
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
-  url: https://github.com/PDB-REDO/${{ name|lower }}/archive/refs/tags/v${{ version }}.tar.gz
+  url: https://github.com/cmbi/${{ name|lower }}/archive/refs/tags/v${{ version }}.tar.gz
   sha256: ${{ sha256 }}
 
 build:
   number: ${{ build_number }}
+  skip:
+    - win
+  script: |
+    set -exo pipefail
+    
+    ./autogen.sh
+    
+    # Avoid build errors with newer Clang versions
+    export CXXFLAGS="${CXXFLAGS} -Wno-enum-constexpr-conversion"
+    
+    ./configure --prefix="${PREFIX}" \
+                --disable-static \
+                --enable-shared \
+                --with-boost="${PREFIX}" \
+                --with-boost-libdir="${PREFIX}/lib" \
+                CXX="${CXX}" \
+                CXXFLAGS="${CXXFLAGS}" \
+                LDFLAGS="${LDFLAGS}"
+    
+    make -j${CPU_COUNT}
+    
+    # Run tests (including static analysis with cppcheck)
+    make check
+    
+    make install
+    
+    mkdir -p $PREFIX/share/man/man1
+    install -m 644 doc/mkdssp.1 $PREFIX/share/man/man1/
 
 requirements:
   build:
     - ${{ compiler("cxx") }}
-    - if: build_platform != target_platform
-      then:
-        - cross-python_${{ target_platform }}
-        - python
     - ${{ stdlib("c") }}
-    - cmake
-    - if: unix
-      then: make
-    - pkg-config
+    - autoconf
+    - automake
+    - libtool
+    - make
+    - cppcheck
   host:
     - libboost-devel
-    - libboost-python-devel
     - bzip2
-    - eigen
-    - icu
-    # Refer to https://github.com/conda-forge/dssp-feedstock/issues/31 for this commentout
-    # libcifpp is fetched and statically linked during building.
-    # - bioconda::libcifpp
-    - libmcfp
-    - pcre2
-    - python ${{ python }}
     - zlib
-  run:
-    - python ${{ python }}
   run_exports:
-    - ${{ pin_subpackage(name|lower, upper_bound="x.x") }}
+    - ${{ pin_subpackage(name|lower, upper_bound="x") }}
 
 tests:
   - script:
       - mkdssp --version
       - mkdssp --help
 
-  - script:
-      - if: unix
-        then: run_test.sh
-      - if: win
-        then: run_test.bat
-    files:
-      source:
-        - test/1cbs.cif.gz
-
-  - python:
-      imports:
-        - mkdssp
-      pip_check: true
 
 about:
-  homepage: https://pdb-redo.eu/dssp
-  repository: https://github.com/PDB-REDO/dssp
-  documentation: https://github.com/PDB-REDO/dssp/blob/trunk/doc/mkdssp.md
-  license: BSD-2-Clause
-  license_file: LICENSE
-  summary: "Application to assign secondary structure to proteins"
-  description: |
-    DSSP (Define Secondary Structure of Proteins) is a program that assigns
-    secondary structure to proteins based on their 3D structure.
-
-    It is widely used in structural biology and bioinformatics for analyzing protein
-    structures.
-
+  homepage: https://swift.cmbi.umcn.nl/gv/dssp
+  repository: https://github.com/cmbi/dssp
+  documentation: https://swift.cmbi.umcn.nl/gv/dssp
+  license: BSL-1.0
+  license_file: LICENSE_1_0.txt
+  summary: "The DSSP building software"
+  description: >
+    The DSSP program was designed by Wolfgang Kabsch and Chris Sander to
+    standardize secondary structure assignment. DSSP is a database of secondary
+    structure assignments (and much more) for all protein entries in the Protein
+    Data Bank (PDB). DSSP is also the program that calculates DSSP entries from
+    PDB entries. DSSP does not predict secondary structure.
+    
 extra:
   recipe-maintainers:
     - eunos-1128
