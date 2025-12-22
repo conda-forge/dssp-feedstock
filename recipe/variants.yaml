@@ -4,4 +4,4 @@ c_stdlib_version:
 
 icu:
   - if: linux and ppc64le
-    then: 75
+    then: "75"
