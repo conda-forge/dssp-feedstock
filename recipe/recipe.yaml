@@ -2,7 +2,7 @@ context:
   name: DSSP
   version: "4.5.8"
   sha256: 634bf8d8dd96954bd680da90f3dcb66b87189c13b12b52b61de8af9d597b74ac
-  build_number: 0
+  build_number: 1
 
 package:
   name: ${{ name|lower }}
@@ -43,12 +43,12 @@ requirements:
     # libcifpp is fetched and statically linked during building.
     # - bioconda::libcifpp
     - libmcfp
-    - numpy ${{ numpy }}
+    - numpy
     - pcre2
-    - python ${{ python }}
+    - python
     - zlib
   run:
-    - python ${{ python }}
+    - python
   run_exports:
     - ${{ pin_subpackage(name|lower, upper_bound="x.x") }}
 
