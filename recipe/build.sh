@@ -30,8 +30,11 @@ cmake -S . -B build \
 cmake --build build --config Release --parallel "${CPU_COUNT}"
 cmake --install build
 
-CIFPP_BUILD_DIR="${SRC_DIR}/build/_deps/cifpp-build/Release"
-if [[ -f "${CIFPP_BUILD_DIR}/libcifpp.so" ]]; then
+CIFPP_BUILD_DIR="${SRC_DIR}/build/_deps/cifpp-build"
+CIFPP_BUILD_DIR_RELEASE="${CIFPP_BUILD_DIR}/Release"
+if [[ -f "${CIFPP_BUILD_DIR_RELEASE}/libcifpp.so" ]]; then
+    cp -v "${CIFPP_BUILD_DIR_RELEASE}/libcifpp.so"* "${PREFIX}/lib/"
+elif [[ -f "${CIFPP_BUILD_DIR}/libcifpp.so" ]]; then
     cp -v "${CIFPP_BUILD_DIR}/libcifpp.so"* "${PREFIX}/lib/"
 fi
 
