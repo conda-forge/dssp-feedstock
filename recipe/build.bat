@@ -30,12 +30,18 @@ if errorlevel 1 exit 1
 cmake --install build
 if errorlevel 1 exit 1
 
-set CIFPP_BUILD_DIR=%SRC_DIR%\build\_deps\cifpp-build\Release
-for %%f in ("%CIFPP_BUILD_DIR%\cifpp.dll") do (
-    if exist "%%f" copy /Y "%%f" "%PREFIX%\Library\bin\"
-)
-for %%f in ("%CIFPP_BUILD_DIR%\cifpp.lib") do (
-    if exist "%%f" copy /Y "%%f" "%PREFIX%\Library\lib\"
+set CIFPP_BUILD_DIR=%SRC_DIR%\build\_deps\cifpp-build
+if errorlevel 1 exit 1
+
+set CIFPP_BUILD_DIR_RELEASE=%CIFPP_BUILD_DIR%\Release
+if errorlevel 1 exit 1
+
+if exist "%CIFPP_BUILD_DIR_RELEASE%\cifpp.dll" (
+    copy /Y "%CIFPP_BUILD_DIR_RELEASE%\cifpp.dll" "%PREFIX%\Library\bin\"
+    copy /Y "%CIFPP_BUILD_DIR_RELEASE%\cifpp.lib" "%PREFIX%\Library\lib\"
+) else if exist "%CIFPP_BUILD_DIR%\cifpp.dll" (
+    copy /Y "%CIFPP_BUILD_DIR%\cifpp.dll" "%PREFIX%\Library\bin\"
+    copy /Y "%CIFPP_BUILD_DIR%\cifpp.lib" "%PREFIX%\Library\lib\"
 )
 if errorlevel 1 exit 1
 
