@@ -38,10 +38,10 @@ cmake --install build
 # and miss the versioned files.
 # On Linux, libcifpp.so* correctly matches libcifpp.so, libcifpp.so.10, etc.
 CIFPP_BUILD_DIR="${SRC_DIR}/build/_deps/cifpp-build"
-if [[ "$(target_platform)" == "linux-"* ]]; then
+if [[ "${target_platform}" == "linux-"* ]]; then
     find "${CIFPP_BUILD_DIR}" -maxdepth 2 -name "libcifpp.so*" \
         -exec cp -vP {} "${PREFIX}/lib/" \;
-elif [[ "$(target_platform)" == "osx-"* ]]; then
+elif [[ "${target_platform}" == "osx-"* ]]; then
     find "${CIFPP_BUILD_DIR}" -maxdepth 2 -name "libcifpp*.dylib" \
         -exec cp -vP {} "${PREFIX}/lib/" \;
 fi
