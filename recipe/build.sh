@@ -30,12 +30,20 @@ cmake -S . -B build \
 cmake --build build --config Release --parallel "${CPU_COUNT}"
 cmake --install build
 
+# libcifpp is not available as a standalone package on conda-forge,
+# so we need to manually copy the shared library built as a CMake
+# FetchContent dependency into the package prefix.
+# On macOS, dylib versioning uses the pattern libcifpp*.dylib (e.g. libcifpp.10.0.dylib),
+# so we cannot use libcifpp${SHLIB_EXT}* which would expand to libcifpp.dylib*
+# and miss the versioned files.
+# On Linux, libcifpp.so* correctly matches libcifpp.so, libcifpp.so.10, etc.
 CIFPP_BUILD_DIR="${SRC_DIR}/build/_deps/cifpp-build"
-CIFPP_BUILD_DIR_RELEASE="${CIFPP_BUILD_DIR}/Release"
-if [[ -f "${CIFPP_BUILD_DIR_RELEASE}/libcifpp${SHLIB_EXT}" ]]; then
-    cp -v "${CIFPP_BUILD_DIR_RELEASE}/libcifpp${SHLIB_EXT}"* "${PREFIX}/lib/"
-elif [[ -f "${CIFPP_BUILD_DIR}/libcifpp${SHLIB_EXT}" ]]; then
-    cp -v "${CIFPP_BUILD_DIR}/libcifpp${SHLIB_EXT}"* "${PREFIX}/lib/"
+if [[ "$(target_platform)" == "linux-"* ]]; then
+    find "${CIFPP_BUILD_DIR}" -maxdepth 2 -name "libcifpp.so*" \
+        -exec cp -vP {} "${PREFIX}/lib/" \;
+elif [[ "$(target_platform)" == "osx-"* ]]; then
+    find "${CIFPP_BUILD_DIR}" -maxdepth 2 -name "libcifpp*.dylib" \
+        -exec cp -vP {} "${PREFIX}/lib/" \;
 fi
 
 # Extract components.cif.gz
