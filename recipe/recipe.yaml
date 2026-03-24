@@ -36,6 +36,8 @@ requirements:
     - libboost-python-devel
     - bzip2
     - eigen
+    - if: osx
+      then: fast_float
     - if: linux and ppc64le  # libboost-devel 1.86.0 for linux-ppc64le does not include any build for icu>=76
       then: icu >=75.0,<76.0a0
       else: icu
