@@ -5,6 +5,8 @@ sed -i "s#if(NOT WIN32)#if(TRUE)#" python-module/CMakeLists.txt
 if errorlevel 1 exit 1
 sed -i "s#if(WIN32 OR NOT Boost_FOUND)#if(NOT Boost_FOUND)#" python-module/CMakeLists.txt
 if errorlevel 1 exit 1
+sed -i "s#find_package(Python 3.13#find_package(Python 3#" python-module/CMakeLists.txt
+if errorlevel 1 exit 1
 
 @REM Refer to https://github.com/conda-forge/dssp-feedstock/pull/14#issuecomment-2974049079 for `-DCIFPP_DATA_DIR=''`
 cmake -S . -B build -G "NMake Makefiles JOM" ^
