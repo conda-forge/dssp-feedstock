@@ -30,16 +30,15 @@ if errorlevel 1 exit 1
 cmake --install build
 if errorlevel 1 exit 1
 
+@REM libcifpp is not available as a standalone package on conda-forge,
+@REM so we need to manually copy the shared library built as a CMake
+@REM FetchContent dependency into the package prefix.
+@REM On Windows, the shared library is split into two files:
+@REM   cifpp.dll  - the runtime shared library, copied to Library\bin\
+@REM   cifpp.lib  - the import library,         copied to Library\lib\
 set CIFPP_BUILD_DIR=%SRC_DIR%\build\_deps\cifpp-build
 if errorlevel 1 exit 1
-
-set CIFPP_BUILD_DIR_RELEASE=%CIFPP_BUILD_DIR%\Release
-if errorlevel 1 exit 1
-
-if exist "%CIFPP_BUILD_DIR_RELEASE%\cifpp.dll" (
-    copy /Y "%CIFPP_BUILD_DIR_RELEASE%\cifpp.dll" "%PREFIX%\Library\bin\"
-    copy /Y "%CIFPP_BUILD_DIR_RELEASE%\cifpp.lib" "%PREFIX%\Library\lib\"
-) else if exist "%CIFPP_BUILD_DIR%\cifpp.dll" (
+if exist "%CIFPP_BUILD_DIR%\cifpp.dll" (
     copy /Y "%CIFPP_BUILD_DIR%\cifpp.dll" "%PREFIX%\Library\bin\"
     copy /Y "%CIFPP_BUILD_DIR%\cifpp.lib" "%PREFIX%\Library\lib\"
 )
