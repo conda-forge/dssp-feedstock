@@ -32,10 +32,10 @@ cmake --install build
 
 CIFPP_BUILD_DIR="${SRC_DIR}/build/_deps/cifpp-build"
 CIFPP_BUILD_DIR_RELEASE="${CIFPP_BUILD_DIR}/Release"
-if [[ -f "${CIFPP_BUILD_DIR_RELEASE}/libcifpp.so" ]]; then
-    cp -v "${CIFPP_BUILD_DIR_RELEASE}/libcifpp.so"* "${PREFIX}/lib/"
-elif [[ -f "${CIFPP_BUILD_DIR}/libcifpp.so" ]]; then
-    cp -v "${CIFPP_BUILD_DIR}/libcifpp.so"* "${PREFIX}/lib/"
+if [[ -f "${CIFPP_BUILD_DIR_RELEASE}/libcifpp${SHLIB_EXT}" ]]; then
+    cp -v "${CIFPP_BUILD_DIR_RELEASE}/libcifpp${SHLIB_EXT}"* "${PREFIX}/lib/"
+elif [[ -f "${CIFPP_BUILD_DIR}/libcifpp${SHLIB_EXT}" ]]; then
+    cp -v "${CIFPP_BUILD_DIR}/libcifpp${SHLIB_EXT}"* "${PREFIX}/lib/"
 fi
 
 # Extract components.cif.gz
