@@ -10,7 +10,7 @@ if [[ "$target_platform" == "osx-"* ]]; then
     export CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 
-sed -i.bak 's|find_package(Python 3.13|find_package(Python 3.13|' python-module/CMakeLists.txt
+sed -i.bak 's|find_package(Python 3.13|find_package(Python 3|' python-module/CMakeLists.txt
 
 # Refer to https://github.com/conda-forge/dssp-feedstock/pull/14#issuecomment-2974049079 for `-DCIFPP_DATA_DIR=''`
 cmake -S . -B build \
