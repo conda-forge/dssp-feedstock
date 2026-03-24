@@ -30,6 +30,11 @@ cmake -S . -B build \
 cmake --build build --config Release --parallel "${CPU_COUNT}"
 cmake --install build
 
+CIFPP_BUILD_DIR="${SRC_DIR}/build/_deps/cifpp-build/Release"
+if [[ -f "${CIFPP_BUILD_DIR}/libcifpp.so" ]]; then
+    cp -v "${CIFPP_BUILD_DIR}/libcifpp.so"* "${PREFIX}/lib/"
+fi
+
 # Extract components.cif.gz
 # Refer to https://github.com/conda-forge/dssp-feedstock/issues/45
 cp -f "${SRC_DIR}/build/_deps/cifpp-src/rsrc/"* "${PREFIX}/share/libcifpp/"
