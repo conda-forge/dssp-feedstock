@@ -24,6 +24,8 @@ libboost_python_devel:
 - '1.86'
 macos_machine:
 - arm64-apple-darwin20.0.0
+numpy:
+- '2'
 pcre2:
 - '10.47'
 pin_run_as_build:
