@@ -13,6 +13,7 @@ cmake -S . -B build -G "NMake Makefiles JOM" ^
     %CMAKE_ARGS% ^
     -DCMAKE_CXX_FLAGS="%CXXFLAGS% /EHsc" ^
     -DCMAKE_CXX_STANDARD=20 ^
+    -DBUILD_SHARED_LIBS=ON ^
     -DBUILD_TESTING=OFF ^
     -DINSTALL_LIBRARY=ON ^
     -DBUILD_PYTHON_MODULE=ON ^
