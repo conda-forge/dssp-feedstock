@@ -1,0 +1,6 @@
+if 'LIBCIFPP_DATA_DIR' in @.env:
+    del @.env['LIBCIFPP_DATA_DIR']
+
+if '_CONDA_SET_LIBCIFPP_DATA_DIR' in @.env:
+    $LIBCIFPP_DATA_DIR = @.env['_CONDA_SET_LIBCIFPP_DATA_DIR']
+    del @.env['_CONDA_SET_LIBCIFPP_DATA_DIR']

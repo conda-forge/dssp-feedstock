@@ -2,6 +2,7 @@ conda_build:
   error_overlinking: true
   pkg_format: '2'
 conda_build_tool: rattler-build
+conda_install_tool: pixi
 conda_forge_output_validation: true
 github:
   branch_name: main

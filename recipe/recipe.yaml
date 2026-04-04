@@ -2,7 +2,7 @@ context:
   name: DSSP
   version: "4.6.0"
   sha256: 17d74b7fb75c68e3dc6e703141a04fe362ede8e7f40c3077b804f6ad2ccc7c02
-  build_number: 0
+  build_number: 1
 
 package:
   name: ${{ name|lower }}
@@ -36,8 +36,7 @@ requirements:
     - libboost-python-devel
     - bzip2
     - eigen
-    - if: osx
-      then: fast_float
+    - fast_float
     - if: linux and ppc64le  # libboost-devel 1.86.0 for linux-ppc64le does not include any build for icu>=76
       then: icu >=75.0,<76.0a0
       else: icu
