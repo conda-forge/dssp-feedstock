@@ -1,8 +1,8 @@
 context:
   name: DSSP
-  version: "4.6.0"
-  sha256: 17d74b7fb75c68e3dc6e703141a04fe362ede8e7f40c3077b804f6ad2ccc7c02
-  build_number: 1
+  version: "4.6.1"
+  sha256: 5ddb8274f03ac0338adffcd661989f515fffb95d40afca404cf2677024256ae3
+  build_number: 0
 
 package:
   name: ${{ name|lower }}
