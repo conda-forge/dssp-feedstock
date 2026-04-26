@@ -17,9 +17,9 @@ docker_image:
 icu:
 - '78'
 libboost_devel:
-- '1.86'
+- '1.90'
 libboost_python_devel:
-- '1.86'
+- '1.90'
 numpy:
 - '2'
 pcre2:
