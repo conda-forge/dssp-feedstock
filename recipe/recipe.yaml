@@ -2,7 +2,7 @@ context:
   name: DSSP
   version: "4.6.1"
   sha256: 5ddb8274f03ac0338adffcd661989f515fffb95d40afca404cf2677024256ae3
-  build_number: 1
+  build_number: 2
 
 package:
   name: ${{ name|lower }}
@@ -43,7 +43,7 @@ requirements:
     # Refer to https://github.com/conda-forge/dssp-feedstock/issues/31 for this commentout
     # libcifpp is fetched and statically linked during building.
     # - bioconda::libcifpp
-    - libmcfp
+    - libmcfp ==1.4.2
     - numpy
     - pcre2
     - python
