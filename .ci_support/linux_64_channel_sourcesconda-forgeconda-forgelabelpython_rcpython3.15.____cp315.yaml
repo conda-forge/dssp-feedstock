@@ -1,29 +1,25 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
-MACOSX_SDK_VERSION:
-- '11.0'
 bzip2:
 - '1'
 c_stdlib:
-- macosx_deployment_target
+- sysroot
 c_stdlib_version:
-- '11.0'
+- '2.17'
 channel_sources:
-- conda-forge
+- conda-forge,conda-forge/label/python_rc
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '21'
+- '15'
+docker_image:
+- quay.io/condaforge/linux-anvil-x86_64:alma10
 icu:
 - '78'
 libboost_devel:
 - '1.90'
 libboost_python_devel:
 - '1.90'
-macos_machine:
-- arm64-apple-darwin20.0.0
 numpy:
 - '2'
 pcre2:
@@ -33,8 +29,11 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.12.* *_cpython
+- 3.15.* *_cp315
 target_platform:
-- osx-arm64
+- linux-64
+zip_keys:
+- - python
+  - channel_sources
 zlib:
 - '1'
