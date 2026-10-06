@@ -32,6 +32,7 @@ requirements:
         - jom
     - pkg-config
   host:
+    - ${{ "libpython" if unix }}
     - libboost-devel
     - libboost-python-devel
     - bzip2
