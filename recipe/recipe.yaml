@@ -30,7 +30,7 @@ requirements:
       then:
         - m2-sed
         - jom
-    - pkg-config
+    - pkgconf
   host:
     - ${{ "libpython" if unix }}
     - libboost-devel
