@@ -24,6 +24,7 @@ requirements:
         - python
     - ${{ stdlib("c") }}
     - cmake
+    - git
     - if: unix
       then: make
     - if: win
